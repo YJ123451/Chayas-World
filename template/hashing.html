@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hashing Example</title>
+  <a href="/"><button>Back to chaya's face</button></a>
+  <style>
+      body {
+          background-image: url('static/hash-function-example.jpg');
+          background-size: 55% 50%;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+        background-position: center bottom;
+          min-height: 100vh;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+      }
+      .content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+          text-align: center;
+      }
+
+      form {
+          background: rgba(255, 255, 255, 0.8);
+          padding: 20px;
+          border-radius: 10px;
+          margin-top: 10px; 
+      }
+  </style>
+
+</head>
+<body>
+    <h1>Hashing Example</h1>
+    <form method="POST" action="/hashing">
+        <label for="input_data">Enter an integer or string:</label>
+        <input type="text" name="input_data" id="input_data" required>
+        <button type="submit">Hash</button>
+    </form>
+    <div>
+        {% if hashed_data %}
+        <p>Hashed Value: {{ hashed_data }}</p>
+        {% endif %}
+      <p style= "font-size: 20px;">Hashing is a technique used in computer science to convert data of arbitrary size to a fixed-size value, which is often a simple number. The process uses a function known as a hash function to perform this conversion. The result of a hash function, known as a hash value or simply hash, represents the original data in a fixed-length form.The form and display below takes a user input, whether integer or string, and returns the hashed value of what was entered.</p> 
+
+    </div>
+</body>
+</html>

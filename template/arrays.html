@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizing Arrays with Find and Delete</title>
+</head>
+<body>
+   <a href="/"><button>Back to Chaya's Face</button></a>
+    <h1>Visualizing Arrays with Find and Delete</h1>
+  
+    <h2>Names as a List</h2>
+    <ul id="name-list"></ul>
+    <button onclick="addName()">Add Name</button>
+    <button onclick="deleteName()">Delete Name</button>
+
+    <h2>Names in a Table</h2>
+    <table id="name-table">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h2>Find Name</h2>
+    <input type="text" id="find-input" placeholder="Enter a name">
+    <button onclick="findName()">Find</button>
+
+    <script>
+        var nameArray = ["Chris League", "Mo Ghriga", "Yair Chaya", "Chung Chungster"];
+
+        var nameList = document.getElementById("name-list");
+        function updateNameList() {
+            nameList.innerHTML = '';
+            nameArray.forEach(function (name) {
+                var listItem = document.createElement("li");
+                listItem.textContent = name;
+                nameList.appendChild(listItem);
+            });
+        }
+        updateNameList();
+
+        var nameTableBody = document.querySelector("#name-table tbody");
+        function updateNameTable() {
+            nameTableBody.innerHTML = '';
+            nameArray.forEach(function (name, index) {
+                var row = nameTableBody.insertRow();
+                var cellIndex = row.insertCell(0);
+                var cellName = row.insertCell(1);
+                cellIndex.textContent = index;
+                cellName.textContent = name;
+            });
+        }
+        updateNameTable();
+
+        function addName() {
+            var newName = prompt("Enter a name:");
+            if (newName !== null) {
+                nameArray.push(newName);
+                updateNameList();
+                updateNameTable();
+            }
+        }
+
+        function deleteName() {
+            var indexToDelete = prompt("Enter the index of the name to delete:");
+            if (indexToDelete !== null) {
+                indexToDelete = parseInt(indexToDelete);
+                if (!isNaN(indexToDelete) && indexToDelete >= 0 && indexToDelete < nameArray.length) {
+                    nameArray.splice(indexToDelete, 1);
+                    updateNameList();
+                    updateNameTable();
+                } else {
+                    alert("Invalid index. Please enter a valid index.");
+                }
+            }
+        }
+
+        function findName() {
+            var nameToFind = document.getElementById("find-input").value;
+            var foundIndex = nameArray.indexOf(nameToFind);
+
+            if (foundIndex !== -1) {
+                alert("Name '" + nameToFind + "' found at index: " + foundIndex);
+            } else {
+                alert("Name not found in the array.");
+            }
+        }
+    </script>
+  <p style = "font-size:20px;">An array is a fixed-size data structure that stores elements of the same data type in contiguous memory locations. On this page it shows you how to add, delete, and find names in an array, giving a clear visual of how these actions impact the data structure. You add a name using the “Add Name” button. After you add a name it will show up in “Names in a Table”. To delete that name you just added, you have to press on the index number next to the name and then click okay. To find a name just enter the name and hit find. 
+
+</p>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Binary Search Tree Visualization
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <a href = "/"><button> Back to Chaya's Face</button></a> 
+  </head>
+  <body>
+    <h1>Binary Tree Example</h1>
+    <p> Binary trees are a special type of tree data structure in which each node has at most two children, referred to as the left child and the right child. Understanding binary trees is fundamental in computer science, as they serve as the basis for various tree-based data structures and algorithms.
+</p>  
+    <script>
+      let tree;
+
+      function setup() {
+        createCanvas(600, 400);
+        tree = new BinaryTree();
+        tree.insert(10);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(3);
+        tree.insert(8);
+        tree.insert(12);
+        tree.insert(18);
+        frameRate(5);
+      }
+
+      function draw() {
+        background(255);
+        tree.display();
+        tree.traverse();
+      }
+
+      class Node {
+        constructor(value) {
+          this.value = value;
+          this.left = null;
+          this.right = null;
+        }
+      }
+
+      class BinaryTree {
+        constructor() {
+          this.root = null;
+        }
+
+        insert(value) {
+          this.root = this._insert(this.root, value);
+        }
+
+        _insert(root, value) {
+          if (root === null) {
+            return new Node(value);
+          }
+
+          if (value < root.value) {
+            root.left = this._insert(root.left, value);
+          } else {
+            root.right = this._insert(root.right, value);
+          }
+
+          return root;
+        }
+
+        traverse() {
+          this._traverse(this.root);
+        }
+
+        _traverse(node) {
+          if (node !== null) {
+            
+            this._traverse(node.left);
+           
+            fill(255, 0, 0);
+            ellipse(node.value * 30, height / 2, 30, 30);
+            fill(0);
+            textAlign(CENTER, CENTER);
+            text(node.value, node.value * 30, height / 2);
+            
+            this._traverse(node.right);
+          }
+        }
+
+        display() {
+          this._display(this.root, width / 2, 50, width / 4);
+        }
+
+        _display(node, x, y, horizontalSpacing) {
+          if (node !== null) {
+            stroke(0);
+            noFill();
+            if (node.left !== null) {
+              line(x, y, x - horizontalSpacing, y + 50);
+            }
+            if (node.right !== null) {
+              line(x, y, x + horizontalSpacing, y + 50);
+            }
+           
+            fill(0);
+            ellipse(x, y, 30, 30);
+            textAlign(CENTER, CENTER);
+            text(node.value, x, y);
+            this._display(node.left, x - horizontalSpacing, y + 50, horizontalSpacing / 2);
+            this._display(node.right, x + horizontalSpacing, y + 50, horizontalSpacing / 2);
+          }
+        }
+      }
+
+    </script>
+    <p>In the image shown below, we can see a perfect binary tree, with the red circles on the bottom representing the value of the nodes.</p>
+  </body>

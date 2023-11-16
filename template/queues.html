@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Queues Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  
+</head>
+  <a href="/"><button>Back to Chaya's Face</button></a>
+<body>
+    <h1>Queues Example</h1>
+  <p style = "font-size: 20px;"> Queues: A queue is a data structure that follows the First-In-First-Out (FIFO) principle. This means the first element added to the queue will be the first one to be removed.
+Below is an animation where images of a face are added to a queue and move from left to right on the screen. This shows the viewer a visual representation of how elements are enqueued and dequeued in a basic queue data structure. As you can see it shows one picture going from left to right at the exact same speed and coming back to repeat over again.
+  </p>
+    <div id="animation-container"></div>
+<script>
+  let queue = []; 
+  let spacing = 300;
+  let speed = 3; 
+  let canvasWidth = window.innerWidth;
+  let canvasHeight = window.innerHeight;
+  let stickFigureSize = 150; 
+  let img; 
+  function preload() {
+
+    img = loadImage('static/Chaya 2.JPG');
+  }
+
+  function setup() {
+    let canvas = createCanvas(canvasWidth, canvasHeight);
+
+   
+    let container = select('#animation-container');
+    if (container) {
+      canvas.parent(container);
+    } else {
+      console.error("Parent container not found.");
+    }
+  }
+
+  function draw() {
+    background(220);
+
+    if (frameCount % 60 == 0) { 
+      let newStickFigure = {
+        x: 0, 
+        y: height / 2, 
+      };
+      queue.push(newStickFigure);
+    }
+    for (let i = 0; i < queue.length; i++) {
+      let stickFigure = queue[i];
+      stickFigure.x += speed;
+      drawStickFigure(stickFigure.x, stickFigure.y);
+      if (stickFigure.x > canvasWidth) {
+        queue.splice(i, 1);
+        i--;
+      }
+    }
+  }
+
+  function drawStickFigure(x, y) {
+    stroke(0);
+    line(x, y - stickFigureSize / 2, x, y + stickFigureSize / 2); 
+    line(x, y - stickFigureSize / 2, x - stickFigureSize / 2, y); 
+    line(x, y - stickFigureSize / 2, x + stickFigureSize / 2, y);
+    line(x, y + stickFigureSize / 2, x - stickFigureSize / 4, y + stickFigureSize); 
+    line(x, y + stickFigureSize / 2, x + stickFigureSize / 4, y + stickFigureSize);
+
+    imageMode(CENTER);
+    image(img, x, y - stickFigureSize / 1.5, 200, 200);
+  }
+</script>
+</body>
+</html>

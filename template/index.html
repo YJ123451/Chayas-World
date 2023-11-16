@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Page</title>
+    <style>
+        body {
+            background-image: url('static/background.jpeg');
+            background-size: 90% 90%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        h1 {
+            color: white;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        a.button {
+            margin: 5px;
+        }
+        
+        .clickable-image {
+            width: 250px;
+            height: auto;
+            cursor: pointer; 
+            position: fixed;
+            bottom: 0px;
+            opacity: 0.75;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Index Page</h1>
+    <div class="content">
+        <a href="/arrays" class="button"><button>Arrays</button></a>
+        <a href="/trees" class="button"><button>Trees</button></a>
+        <a href="/bfs" class="button"><button>BFS</button></a>
+        <a href="/hashing" class="button"><button>Hashing</button></a>
+      <a href="/queues" class="button"><button>Queues</button></a>
+        <img src="static/Chung.jpeg" alt="Clickable Image" class="clickable-image" onclick="handleClick()">
+    </div>
+    <script>
+        function handleClick() {
+            showAlert("40 pints for you!").then(function () {
+                setTimeout(function () {
+                    var newTab = window.open('/easter_egg', '_blank');
+                    newTab.focus();
+                }, 500);
+            });
+        }
+
+        function showAlert(message) {
+            return new Promise(function (resolve) {
+                alert(message);
+                resolve();
+            });
+        }
+    </script>
+</body>
+</html>
